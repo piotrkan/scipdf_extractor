@@ -15,7 +15,7 @@ Although my approach is far from best, it is the safest & fastest to implement s
 
 
 ## 3. **Error Handling:** Can you describe how your API handles potential errors?_
-Gradio allows for flagging errors by users, which is helpful from MLOps perspective. If more time was available, I would have written proper unit tests for the code allowing for better error handling, but with exploration of the test pdfs, examining different parsing and NER methods as well as app/API development, TDD is not really viable.
+I did not have much time for error handling.  If more time was available, I would have written proper unit tests for the code allowing for better error handling, but with exploration of the test pdfs, examining different parsing and NER methods as well as app/API development, TDD is not really viable. That being said though, gradio allows for flagging errors by users, which is helpful from MLOps perspective; the live app on hugging face will have logs recording errors.
 
 ## 4. **Challenges and Learnings:** What were the top challenges faced, and what did you learn from them?_
 * Lack of model specificity - while it was mentioned that high entity extraction accuracy would be valued, how can we assess it if no proper target entities are provided to the supplied papers? 
