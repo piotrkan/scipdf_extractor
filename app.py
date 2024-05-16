@@ -1,4 +1,6 @@
-import os, json
+'''gradio app script'''
+import os
+import json
 import gradio as gr
 from src import data, model
 
@@ -19,11 +21,11 @@ def main():
         fn=pdf_ext_wrapper,
         inputs=["file"],
         outputs=[gr.JSON(label='Json output')],
-        examples = [os.path.join('data',pdf) for pdf in os.listdir('data')], #['data/1.pdf', 'data/2.pdf','data/3.pdf'],
+        examples = [os.path.join('data',pdf) for pdf in os.listdir('data')],
         title = 'SciPDF NER extractor',
         description = 'Prototype of NER extractor from scientific papers in PDF format',
                         )
     demo.launch(show_error=True )
-    
+
 if __name__=='__main__':
     main()

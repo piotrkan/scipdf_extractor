@@ -36,7 +36,7 @@ Once that is achieved, you should be able to access your application using the f
 If you wish to use the app's API,  you can run: 
 
 ~~~
-api_call.py --name 
+api_call.py --name enfothelial_dysfunction #example pdf paper from data/
 ~~~
 
 This will then create the results 

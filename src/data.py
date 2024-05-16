@@ -1,3 +1,4 @@
+'''module for data-related functionalities'''
 import os
 import pymupdf
 
@@ -17,7 +18,7 @@ def change_pdf_files(path:str)-> None:
             old_path = os.path.join(path, pdf)
             new_path = os.path.join(path, new_name)
             os.rename(old_path, new_path)
-    
+
 def extract_txt_from_pdf(path:str, pages:list=None) -> str:
     """
     	Function for extracting text from pdf. NOTE: needs testing
@@ -29,23 +30,23 @@ def extract_txt_from_pdf(path:str, pages:list=None) -> str:
 	    the extracted text in str format
     """
     doc = pymupdf.open(path)
-    print(type(doc))
     number_of_pages = doc.page_count
     page_texts = []
-    if pages==None:
+    if pages is None:
         for i in range(number_of_pages):
             page = doc[i]
             text = page.get_text()
             page_texts.append(text)
     else:
         for i in pages:
-            page = doc.pages[i]
+            page = doc[i]
             text = page.get_text()
             page_texts.append(text)
     return ''.join(page_texts)
 
 def main():
+    '''main function'''
     change_pdf_files('data')
-    
+
 if __name__=='__main__':
     main()
