@@ -7,7 +7,7 @@ from gradio_client import Client
 
 def get_args() -> argparse.Namespace:
     """
-    Argument parser.
+    Argument parser. Used so that we can call API from CLI
     """
     parser = argparse.ArgumentParser(
         prog='API call for scipdf extractor',
@@ -30,11 +30,16 @@ def get_args() -> argparse.Namespace:
         default='results',
         help="Path to save json output"
     )
+    parser.add_argument(
+        "--live",
+        action="store_true",
+        help="If flag, use live API hosted on HF",
+    )
     args = parser.parse_args()
     return args
 
 
-def call_api(input_path: str) -> dict:
+def call_api(input_path: str, live_api=False) -> dict:
     """
     Function to initialize and call gradio api
     Args:
@@ -43,7 +48,10 @@ def call_api(input_path: str) -> dict:
         dict json
     """
     # initiate connection with the client
-    client = Client("http://127.0.0.1:7860/")
+    if live_api:
+        client = Client("piotrkan/scipdf_extract_app")
+    else:
+        client = Client("http://127.0.0.1:7860/")
 
     # run extraction
     result = client.predict(input_pdf=input_path, api_name="/predict")
@@ -74,7 +82,7 @@ def main():
     '''call api endpoint for inference and save output'''
     args = get_args()
     pdf_pathway = os.path.join(args.data_dir, f'{args.name}.pdf')
-    json_output = call_api(pdf_pathway)
+    json_output = call_api(pdf_pathway, args.live)
     save_json(json_output, args.save_path, args.name)
     print('Entities Extracted Successfully')
 

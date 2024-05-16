@@ -17,6 +17,7 @@ def pdf_ext_wrapper(input_pdf:str)->dict:
     return json.dumps(output)
 
 def main():
+    #define interace and launch
     demo = gr.Interface(
         fn=pdf_ext_wrapper,
         inputs=["file"],
