@@ -1,23 +1,29 @@
+import os, json
 import gradio as gr
 from src import data, model
-from pypdf import PdfReader
-import os, json
 
-def pdf_wrapper(input_pdf):
+def pdf_ext_wrapper(input_pdf:str)->dict:
+    """
+    	Wrapper for extracting entities from pdfs for gradio
+    Args:
+    	input_pdf - path to the pdf to be read
+	Outs:
+	    json file with extracted entities
+    """
     output= data.extract_txt_from_pdf(input_pdf)
     output = model.extract_entities_with_context('en_ner_bc5cdr_md', output)
     return json.dumps(output)
 
 def main():
     demo = gr.Interface(
-        fn=pdf_wrapper,
+        fn=pdf_ext_wrapper,
         inputs=["file"],
         outputs=[gr.JSON(label='Json output')],
-        examples = ['data/1.pdf', 'data/2.pdf','data/3.pdf'],
+        examples = [os.path.join('data',pdf) for pdf in os.listdir('data')], #['data/1.pdf', 'data/2.pdf','data/3.pdf'],
         title = 'SciPDF NER extractor',
         description = 'Prototype of NER extractor from scientific papers in PDF format',
                         )
-    demo.launch()
+    demo.launch(show_error=True )
     
 if __name__=='__main__':
     main()
