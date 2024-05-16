@@ -18,6 +18,30 @@ def extract_entity_context(doc, entity_text:str, span_length:int)  -> str:
             context_tokens = doc[start_token:end_token]
             return context_tokens.text, start_token, end_token
 
+def install_ners(model:str):
+    """
+    	function for installing and downloading ner models for scispacy fromnFunction for extracting entities from provides strings.
+        it's a hacky attempt to get these models installed when having the app deployed on hugginface spaces (cant install these
+        models from requirements.txt as docker image cant be build from urls)
+    Args:
+    	model - ner model from spacy for entity extraction
+        text - corpus of the pdf 
+        span_length - optional, the context window, specifying no. tokens before & after entity keyword
+	Outs:
+	    list of dictionaries containing entity, location and context
+    """
+    if model=='en_ner_craft_md':
+        !pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_ner_craft_md-0.5.4.tar.gz
+    elif model=='en_ner_jnlpba_md':
+        !pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_ner_jnlpba_md-0.5.4.tar.gz
+    elif model == 'en_ner_bc5cdr_md':
+        !pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_ner_bc5cdr_md-0.5.4.tar.gz
+    elif model == 'en_ner_bionlp13cg_md':
+        !pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_ner_bionlp13cg_md-0.5.4.tar.gz
+    else:
+        raise ValueError('no such model')
+
+
 def extract_entities_with_context(model, text:str, span_length:int=10) -> list:
     """
     	Function for extracting entities from provides strings
@@ -29,7 +53,11 @@ def extract_entities_with_context(model, text:str, span_length:int=10) -> list:
 	    list of dictionaries containing entity, location and context
     """
     #load the ner model and apply it to the text
-    nlp = spacy.load(model) 
+    try:
+        nlp = spacy.load(model)
+    except:
+        install_ners(model)
+        nlp = spacy.load(model)
     doc = nlp(text)
     
     # Extract entities and their labels
