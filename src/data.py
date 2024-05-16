@@ -1,7 +1,7 @@
 import os
-from pypdf import PdfReader
+import pymupdf
 
-def change_pdf_files(path)-> None:
+def change_pdf_files(path:str)-> None:
     """
     	Function for renaming supplied pdf files to more
         programming-friendly way (removing whitespace). 
@@ -18,22 +18,30 @@ def change_pdf_files(path)-> None:
             new_path = os.path.join(path, new_name)
             os.rename(old_path, new_path)
     
-def extract_txt_from_pdf(path:str) -> str:
+def extract_txt_from_pdf(path:str, pages:list=None) -> str:
     """
     	Function for extracting text from pdf. NOTE: needs testing
         and more controlled text extraction (at the moment ALL text getting extracted)
     Args:
     	path - path to the pdf to be read
+        pages - optional, list of pages to be read
 	Outs:
 	    the extracted text in str format
     """
-    reader = PdfReader(path)
-    number_of_pages = len(reader.pages)
+    doc = pymupdf.open(path)
+    print(type(doc))
+    number_of_pages = doc.page_count
     page_texts = []
-    for i in range(1,number_of_pages):
-        page = reader.pages[i]
-        text = page.extract_text()
-        page_texts.append(text)
+    if pages==None:
+        for i in range(number_of_pages):
+            page = doc[i]
+            text = page.get_text()
+            page_texts.append(text)
+    else:
+        for i in pages:
+            page = doc.pages[i]
+            text = page.get_text()
+            page_texts.append(text)
     return ''.join(page_texts)
 
 def main():

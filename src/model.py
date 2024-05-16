@@ -41,9 +41,9 @@ def extract_entities_with_context(model, text:str, span_length:int=10) -> list:
         context, start, end = extract_entity_context(doc, ent.text, span_length)
         entities_with_context.append({
             'entity': ent.text, #entity
-            'start':start, #start token 
-            'end': end, #end token
-            # 'label': ent.label, #label, not needed at the moment
+            'start_context':start, #start token 
+            'end_context': end, #end token
+            'label': ent.label_, #label, not needed at the moment
             'context': context # specified context
         })
     print(entities_with_context)
