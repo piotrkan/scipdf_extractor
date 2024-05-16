@@ -47,7 +47,7 @@ To examine the exploratory work which I used for decision making, see explore.ip
 
 
 ## Repo structure
-
+~~~
 ml_challenge/
 ├── data/          # Data directory; normally would be empty or not present in git 
 │                   # as its bad practice to put data in git; for the purpose of this task, will be present
@@ -61,3 +61,4 @@ ml_challenge/
 │   └── data.py   # exploratory notebook with benchmarking and pdf parsing solutions  
 ├── ANSWERS.md     # answers to the questions
 └── README.md      # Project README
+~~~
