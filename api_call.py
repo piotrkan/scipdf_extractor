@@ -7,7 +7,7 @@ from gradio_client import Client
 
 def get_args() -> argparse.Namespace:
     """
-    Argument parser.
+    Argument parser. Used so that we can call API from CLI
     """
     parser = argparse.ArgumentParser(
         prog='API call for scipdf extractor',
