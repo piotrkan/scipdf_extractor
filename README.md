@@ -57,13 +57,18 @@ This will then create the results directory where json files are being saved.
 
 To examine the exploratory work which I used for decision making, see explore.ipynb
 
+## Final Comment
+Initially I was planning to only focus on the ML part of the project and not work on API, as I am not a software developer. However I realized that there is no clear model, output or data specifications/requirements, and that there is no labelled data (pdfs were provided but not associated entities; of course in real-world scenario we often don't have labels but then we should have domain experts / more information about what is actually needed) - therefore I decided to attempt completing the whole challenge. 
+
+My solution is far from perfect or production-ready software and I am aware of it - but as I needed to complete the entire challenge in a relatively short timeframe, I decided to do more of a 'prototype' app rather than a final product. Some areas for improvement: both preprocessing of the data and post-processing of the output still need to be done; API and the APP should be more standalone, secure and optimized; NER system would also require fine-tuning, however as the time
+
 ## Repo structure
 ~~~
 ml_challenge/
 ├── data/          # Data directory; normally would be empty or not present in git 
 │                  # as its bad practice to put data in git; for the purpose of this task, will be present
-├── results/       # Results directory; created upon running api 
-├── flagged/       # errors log, errors flagged by app users; created upon running api 
+├── results/       # Results directory; created upon running api_call 
+├── flagged/       # errors log, errors flagged by app users; created upon running the gradio app 
 ├── src/           # Source code
 │   ├── models.py  # nlp related utilities
 │   └── data.py    # data-related utilities
