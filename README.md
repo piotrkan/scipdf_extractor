@@ -9,7 +9,7 @@ You can find the deployed version of this app on https://huggingface.co/spaces/p
 If you would like to use the API endpoint from the hosted app, run:
 ~~~
 #enfothelial_dysfunction is an example pdf paper from data/ dir
-api_call.py --name enfothelial_dysfunction 
+api_call.py --name enfothelial_dysfunction --live
 ~~~
 
 The application can be also reproduced locally by following this github, see below. Please note that the app is a **prototype** as it is far from perfect in terms of both performance and deployment.
