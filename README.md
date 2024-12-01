@@ -1,5 +1,5 @@
-# scipdf_extractor
-This is a code repo for the Scientific PDF entity extractor PoC as a part of the coding challenge. I developed this repo using Windows Machine on VSCode. 
+# scipdf_extractor 
+This is a code repo for the Scientific PDF entity extractor PoC as a part of the coding challenge. I developed this repo using Windows Machine (WSL) on VSCode. 
 
 You are more than welcome to check the [hugging face spaces](https://huggingface.co/spaces/piotrkan/scipdf_extract_app) however the development work is captured in this github repo (on development branch to be precise, but I merged it with main via PR). 
 
